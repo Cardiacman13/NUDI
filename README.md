@@ -31,8 +31,8 @@ To use NUDI, follow these steps:
 
 
    ```bash
-   git clone https://github.com/Cardiacman13/NvidiaUniversalDriverInstaller.git
-   cd NvidiaUniversalDriverInstaller
+   git clone https://github.com/Cardiacman13/NUDI.git
+   cd NUDI
    chmod +x ./nvidiainstaller.sh
    ./nvidiainstaller.sh
    ```
