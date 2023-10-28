@@ -11,7 +11,7 @@ function fedora() {
 
     echo "  |- Updated package lists..."
     # Update package lists
-    dnf update --refresh > /dev/null 2>&1
+    dnf check-update > /dev/null 2>&1
 
     echo -e "  |- Installing Nvidia drivers... ${RED}(Might be long)${RESET}"
     # Install the Nvidia drivers
