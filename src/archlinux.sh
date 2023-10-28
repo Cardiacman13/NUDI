@@ -9,7 +9,7 @@ function hook() {
     local hook_file
     hook_file="nvidia.hook"
     local hook_src
-    hook_src="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/NvidiaUniversalDriverInstaller/data/nvidia.hook"
+    hook_src="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/data/nvidia.hook"
     
     # Create the hooks folder if not already done
     mkdir -p "${hook_folder}"
@@ -70,7 +70,7 @@ function bootloaders() {
     else
         local boot_loader_src="/boot/loader/entries/*.conf"
         echo "|- Adding nvidia-drm.modeset=1 to boot options for systemd-boot."
-        if ! sed -i '/^options/ s/$/ nvidia-drm.modeset=1/' "${boot_loader_src}"; then
+        if ! sed -i '/^options/ s/$/ nvidia-drm.modeset=1/' ${boot_loader_src}; then
             echo -e "${RED}Error adding boot option for systemd-boot.${RESET}"
             exit 1
         fi
