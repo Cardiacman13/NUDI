@@ -30,7 +30,7 @@ source src/archlinux.sh
 source src/fedora.sh
 source src/opensuse.sh
 source src/opensusetw.sh
-source src/setup/reboot_timer.sh
+source src/reboot_timer.sh
 source src/utils.sh
 
 # ============================================= Welcome Message Function =============================================
