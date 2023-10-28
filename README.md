@@ -1,5 +1,7 @@
 # Nvidia Universal Driver Installer (NUDI)
 
+[Version française](https://github.com/Cardiacman13/NUDI/blob/main/lang/README.fr.md)
+
 ## Description
 
 NUDI (Nvidia Universal Driver Installer) is a versatile Bash script designed to simplify the installation of Nvidia drivers across various Linux distributions. It supports Ubuntu, Debian, Fedora, Arch Linux, openSUSE, and their derivatives. This tool is especially useful for users seeking an easy and automated way to install Nvidia drivers without navigating through the intricacies of each distribution's package management and driver installation methods.
