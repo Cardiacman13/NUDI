@@ -34,7 +34,7 @@ To use NUDI, follow these steps:
    git clone https://github.com/Cardiacman13/NUDI.git
    cd NUDI
    chmod +x ./nvidiainstaller.sh
-   ./nvidiainstaller.sh
+   sudo ./nvidiainstaller.sh
    ```
 
 
