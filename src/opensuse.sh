@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # openSUSE Nvidia Driver Installation Script
 function opensuse() {
     echo "Starting Nvidia driver installation for openSUSE..."
