@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Update system and install necessary packages
 function debian() {
     echo "|- Updating system and installing Nvidia drivers."
@@ -22,7 +24,7 @@ function debian() {
 
     echo -e "  |- Installing Nvidia drivers and related packages... ${RED}(Might be long)${RESET}"
     # Install the Nvidia drivers along with 32-bit libraries and Vulkan tools
-    apt install -y linux-headers-$(uname -r) build-essential dkms firmware-misc-nonfree nvidia-driver nvidia-driver-libs:i386 vulkan-tools vulkan-tools:i386 nvidia-cuda-dev nvidia-cuda-toolkit > /dev/null 2>&1
+    apt install -y linux-headers-"$(uname -r)" build-essential dkms firmware-misc-nonfree nvidia-driver nvidia-driver-libs:i386 vulkan-tools vulkan-tools:i386 nvidia-cuda-dev nvidia-cuda-toolkit > /dev/null 2>&1
 
     echo "Nvidia drivers installed successfully."
 }

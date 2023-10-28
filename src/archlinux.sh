@@ -1,10 +1,15 @@
+#!/usr/bin/env bash
+
 # Function to configure the Nvidia hook by copying the nvidia.hook file to /etc/pacman.d/hooks/
 function hook() {
     echo "|- Configuring the Nvidia hook."
 
-    local hook_folder="/etc/pacman.d/hooks/"
-    local hook_file="nvidia.hook"
-    local hook_src="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/NvidiaUniversalDriverInstaller/data/nvidia.hook"
+    local hook_folder
+    hook_folder="/etc/pacman.d/hooks/"
+    local hook_file
+    hook_file="nvidia.hook"
+    local hook_src
+    hook_src="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)/NvidiaUniversalDriverInstaller/data/nvidia.hook"
     
     # Create the hooks folder if not already done
     mkdir -p "${hook_folder}"
@@ -22,7 +27,8 @@ function hook() {
 function mkinitcpio() {
     echo "|- Configuring mkinitcpio."
 
-    local mkinitcpio_src="/etc/mkinitcpio.conf"
+    local mkinitcpio_src
+    mkinitcpio_src="/etc/mkinitcpio.conf"
     
     # Add NVIDIA modules to mkinitcpio
     if sed -i '/MODULES=/ s/)/ nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "${mkinitcpio_src}"; then
@@ -64,7 +70,7 @@ function bootloaders() {
     else
         local boot_loader_src="/boot/loader/entries/*.conf"
         echo "|- Adding nvidia-drm.modeset=1 to boot options for systemd-boot."
-        if ! sed -i '/^options/ s/$/ nvidia-drm.modeset=1/' ${boot_loader_src}; then
+        if ! sed -i '/^options/ s/$/ nvidia-drm.modeset=1/' "${boot_loader_src}"; then
             echo -e "${RED}Error adding boot option for systemd-boot.${RESET}"
             exit 1
         fi
@@ -76,7 +82,8 @@ function archlinux() {
     echo "|- Update system."
     pacman -Syy --noconfirm >> /dev/null 2>&1
     echo "|- Preconfiguration for Nvidia."
-    local nvidia_wayland_conf="/etc/modprobe.d/nvidia-wayland.conf"
+    local nvidia_wayland_conf
+    nvidia_wayland_conf="/etc/modprobe.d/nvidia-wayland.conf"
     echo "options nvidia NVreg_PreserveVideoMemoryAllocations=1" | sudo tee "${nvidia_wayland_conf}"
 
     bootloaders
@@ -88,7 +95,7 @@ function archlinux() {
 
     choice=$(echo "$choice" | tr '[:lower:]' '[:upper:]')  # Convert input to uppercase.
 
-    while [[ -z "$choice" || ! " NVIDIA NVIDIA-ALL " =~ " $choice " ]]; do
+    while [[ -z "$choice" || ! "$choice" =~ ^NVIDIA(-ALL)?$ ]]; do
         read -p "Invalid or empty option. Please choose 'nvidia' or 'nvidia-all':" choice
         choice=$(echo "$choice" | tr '[:lower:]' '[:upper:]')
     done

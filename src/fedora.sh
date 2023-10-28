@@ -1,15 +1,17 @@
+#!/usr/bin/env bash
+
 # Fedora Nvidia Driver Installation Script
 function fedora() {
     echo "|- Enabling RPM Fusion and installing Nvidia drivers."
 
     echo "  |- Enabling RPM Fusion Free and Non-Free repositories..."
     # Enable RPM Fusion (Free and Non-Free)
-    dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm > /dev/null 2>&1
-    dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm > /dev/null 2>&1
+    dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm > /dev/null 2>&1
+    dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm > /dev/null 2>&1
 
     echo "  |- Updated package lists..."
     # Update package lists
-    dnf update > /dev/null 2>&1
+    dnf update --refresh > /dev/null 2>&1
 
     echo -e "  |- Installing Nvidia drivers... ${RED}(Might be long)${RESET}"
     # Install the Nvidia drivers
@@ -28,7 +30,7 @@ function fedora() {
 
     echo "|- Rebuilding initramfs."
 
-    echo e- "  |- Rebuilding initramfs... ${RED}(Might be long)${RESET}"
+    echo -e "  |- Rebuilding initramfs... ${RED}(Might be long)${RESET}"
     dracut --force > /dev/null 2>&1
 
     echo "Nvidia drivers installed successfully."

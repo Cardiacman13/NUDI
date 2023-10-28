@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Ubuntu Nvidia Driver Installation Script
 function ubuntu() {
     echo "|- Updating system and installing Nvidia drivers."

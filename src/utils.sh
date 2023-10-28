@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 function read_user() {
     read -p "${1} [y/N]: " choice
     case "${choice}" in

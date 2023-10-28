@@ -104,13 +104,16 @@ function choose_distro() {
 
 # Main function
 function main() {
-    local start_time=$(date +%s)
+    local start_time
+    start_time=$(date +%s)
 
     welcome_msg
     choose_distro  # Let the user choose their distribution
 
-    local end_time=$(date +%s)
-    local duration=$((end_time - start_time))
+    local end_time
+    end_time=$(date +%s)
+    local duration
+    duration=$((end_time - start_time))
 
     # Display the script execution duration
     echo -e "${GREEN}The script took ${duration} seconds to execute.${RESET}"

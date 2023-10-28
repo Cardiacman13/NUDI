@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Function for rebooting with a countdown timer
 function reboot_timer() {
     local timer=$1
@@ -11,5 +13,5 @@ function reboot_timer() {
             ((timer--))
         done
     fi
-    sudo reboot
+    reboot
 }
