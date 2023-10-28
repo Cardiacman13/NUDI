@@ -1,6 +1,6 @@
 # Nvidia Universal Driver Installer (NUDI)
 
-[Version française](https://github.com/Cardiacman13/NUDI/blob/main/lang/README.fr.md)
+[Version française](https://github.com/Cardiacman13/NUDI/blob/main/lang/README.fr.md) [Versión española](https://github.com/Cardiacman13/NUDI/blob/main/lang/README.es.md)
 
 ## Description
 
