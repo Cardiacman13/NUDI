@@ -15,7 +15,7 @@ function debian() {
     apt update -y > /dev/null 2>&1
 
     # Install software-properties-common if add-apt-repository is not available
-    if ! command -v add-apt-repository; then
+    if ! command -v add-apt-repository > /dev/null; then
         echo "  |- Installing software-properties-common..."
         apt install -y software-properties-common > /dev/null 2>&1
     fi
