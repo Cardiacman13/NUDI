@@ -20,5 +20,8 @@ function opensuse_tw() {
     echo -e "Installing Nvidia drivers... ${RED}(Might be long)${RESET}"
     zypper install -y nvidia_drivers_G06 nvidia_drivers_G06_kmp_default nvidia_gl_G06 nvidia_gl_G06_32bit nvidia_utils_G06 nvidia_video_G06 nvidia_video_G06_32bit
 
+    echo "Cleaning xorg configuration"
+    rm /etc/X11/xorg.conf
+
     echo "Nvidia drivers installed successfully."
 }
