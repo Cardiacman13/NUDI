@@ -84,7 +84,7 @@ function archlinux() {
     echo "|- Preconfiguration for Nvidia."
     local nvidia_wayland_conf
     nvidia_wayland_conf="/etc/modprobe.d/nvidia-wayland.conf"
-    echo "options nvidia NVreg_PreserveVideoMemoryAllocations=1" | sudo tee "${nvidia_wayland_conf}"
+    echo "options nvidia NVreg_PreserveVideoMemoryAllocations=1" | tee "${nvidia_wayland_conf}"
 
     bootloaders
     mkinitcpio
