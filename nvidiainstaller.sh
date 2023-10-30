@@ -14,10 +14,8 @@ RESET=$(tput sgr0)     # Reset
 # ============================================= Sudo Checks ==============================================
 
 # Check for root privileges
-if sudo -v; then
-    echo -e "${GREEN}Authentication successful.${RESET}"
-else
-    echo -e "${RED}Authentication failed. The script requires root privileges to run.${RESET}"
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root"
     exit 1
 fi
 
