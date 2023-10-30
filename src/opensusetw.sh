@@ -6,22 +6,24 @@ function opensuse_tw() {
 
     # Refreshing the repositories
     echo "Refreshing repositories..."
-    zypper ref
+    zypper ref > /dev/null 2>&1
 
     # Adding the Nvidia repository for Tumbleweed
     echo "Adding the Nvidia repository for Tumbleweed..."
-    zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA
+    zypper addrepo --refresh https://download.nvidia.com/opensuse/tumbleweed NVIDIA > /dev/null 2>&1
 
     # Ensuring the repository is trusted
     echo "Ensuring the repository is trusted..."
-    zypper --gpg-auto-import-keys ref
+    zypper --gpg-auto-import-keys ref > /dev/null 2>&1
 
     # Installing the Nvidia drivers
     echo -e "Installing Nvidia drivers... ${RED}(Might be long)${RESET}"
-    zypper install -y nvidia_drivers_G06 nvidia_drivers_G06_kmp_default nvidia_gl_G06 nvidia_gl_G06_32bit nvidia_utils_G06 nvidia_video_G06 nvidia_video_G06_32bit
+    zypper install --auto-agree-with-licenses -y nvidia-drivers-G06 nvidia-driver-G06-kmp-default nvidia-gl-G06 nvidia-gl-G06-32bit nvidia-utils-G06 nvidia-video-G06 nvidia-video-G06-32bit > /dev/null 2>&1
 
-    echo "Cleaning xorg configuration"
-    rm /etc/X11/xorg.conf
+    echo "Cleaning Xorg configuration..."
+    if [ -e /etc/X11/xorg.conf ]; then
+        rm /etc/X11/xorg.conf > /dev/null 2>&1
+    fi
 
     echo "Nvidia drivers installed successfully."
 }
