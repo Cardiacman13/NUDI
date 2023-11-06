@@ -80,7 +80,7 @@ function bootloaders() {
 # Function to install Nvidia drivers.
 function archlinux() {
     echo "|- Update system."
-    pacman -Syy --noconfirm >> /dev/null 2>&1
+    pacman -Syu --noconfirm >> /dev/null 2>&1
     echo "|- Preconfiguration for Nvidia."
     local nvidia_wayland_conf
     nvidia_wayland_conf="/etc/modprobe.d/nvidia-wayland.conf"
@@ -105,7 +105,6 @@ function archlinux() {
             echo -e "|- Installing Nvidia packages. ${RED}(long)${RESET}"
             pacman -S --needed --noconfirm nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader >> /dev/null 2>&1
             echo -e "|- Installing CUDA. ${RED}(very long)${RESET}"
-            pacman -S --needed --noconfirm cuda >> /dev/null 2>&1
 
             echo "|- Enabling Nvidia services for hibernation, resume, and suspension."
             systemctl enable nvidia-{hibernate,resume,suspend} >> /dev/null 2>&1
@@ -120,7 +119,6 @@ function archlinux() {
             cd .. || exit
             rm -rf nvidia-all >> /dev/null 2>&1
             echo -e "|- Installing CUDA. ${RED}(very long)${RESET}"
-            pacman -S --needed --noconfirm cuda >> /dev/null 2>&1
 
             echo "|- Enabling Nvidia services for hibernation, resume, and suspension."
             systemctl enable nvidia-{hibernate,resume,suspend} >> /dev/null 2>&1
