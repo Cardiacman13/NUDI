@@ -33,7 +33,7 @@ function fedora() {
 
     echo -e "  |- Installing CUDA, 32-bit support and related packages... ${RED}(Might be long)${RESET}"
     # Optional: Install 32-bit support for 64-bit systems, useful for some games and applications
-    dnf install -y xorg-x11-drv-nvidia-cuda wine-dxvk vulkan > /dev/null 2>&1
+    dnf install -y vulkan > /dev/null 2>&1
     dnf install -y xorg-x11-drv-nvidia-libs.i686 > /dev/null 2>&1
 
     echo "|- Rebuilding initramfs..."
