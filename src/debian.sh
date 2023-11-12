@@ -31,5 +31,14 @@ function debian() {
     # Install the Nvidia drivers along with 32-bit libraries and Vulkan tools
     apt install -y linux-headers-amd64 build-essential dkms firmware-misc-nonfree nvidia-driver nvidia-driver-libs:i386 vulkan-tools libnvoptix1 > /dev/null 2>&1
 
+    
+    echo -e "  |- Installing drm-modeset=1 configuration..."
+
+    if [[ -f /etc/modprobe.d/nvidia.conf ]]; then
+        rm /etc/modprobe.d/nvidia.conf
+    fi
+    touch /etc/modprobe.d/nvidia.conf
+    echo "options nvidia-drm modeset=1" > /etc/modprobe.d/nvidia.conf
+
     echo "Nvidia drivers installed successfully."
 }
