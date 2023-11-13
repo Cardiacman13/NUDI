@@ -15,7 +15,7 @@ function fedoraimmutable() {
     rpm-ostree install akmod-nvidia xorg-x11-drv-nvidia 2>&1
 
     echo "  |- Editing grub options for Nvidia."
-    sudo rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1 initcall_blacklist=simpledrm_platform_driver_init > /dev/null 2>&1
+    rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1 initcall_blacklist=simpledrm_platform_driver_init > /dev/null 2>&1
     rpm-ostree kargs --delete=nomodeset > /dev/null 2>&1
     
     echo "Nvidia drivers installed successfully."
