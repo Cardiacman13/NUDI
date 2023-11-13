@@ -28,6 +28,7 @@ source src/archlinux.sh
 source src/fedora.sh
 source src/opensuse.sh
 source src/opensusetw.sh
+source src/fedoraimmutable.sh
 source src/reboot_timer.sh
 source src/utils.sh
 
@@ -67,9 +68,10 @@ function choose_distro() {
     1) Ubuntu
     2) Debian
     3) Fedora
-    4) Arch Linux
-    5) openSUSE Leap
-    6) openSUSE Tumbleweed"
+    4) Fedora Immutable (Silverblue, Kinoite...)
+    5) Arch Linux
+    6) openSUSE Leap
+    7) openSUSE Tumbleweed"
     read -p "Enter the number of your choice: " distro_choice
 
     case $distro_choice in
@@ -83,12 +85,15 @@ function choose_distro() {
             fedora
             ;;
         4)
-            archlinux
+            fedoraimmutable
             ;;
         5)
-            opensuse
+            archlinux
             ;;
         6)
+            opensuse
+            ;;
+        7)
             opensuse_tw
             ;;
         *)
