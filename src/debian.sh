@@ -29,7 +29,7 @@ function debian() {
 
     echo -e "  |- Installing Nvidia drivers and related packages... ${RED}(Might be long)${RESET}"
     # Install the Nvidia drivers along with 32-bit libraries and Vulkan tools
-    apt install -y linux-headers-amd64 build-essential dkms firmware-misc-nonfree nvidia-driver nvidia-driver-libs:i386 vulkan-tools libnvoptix1 > /dev/null 2>&1
+    apt install -y linux-headers-amd64 build-essential dkms firmware-misc-nonfree libglvnd-dev pkg-config nvidia-driver nvidia-driver-libs:i386 vulkan-tools libnvoptix1 > /dev/null 2>&1
 
     
     echo -e "  |- Installing drm-modeset=1 configuration..."
