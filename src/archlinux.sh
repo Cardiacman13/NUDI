@@ -31,13 +31,13 @@ function install_headers() {
         kernel_headers+=("$(basename "${kernel}" | sed -e 's/vmlinuz-//')-headers")
     done
 
-    sudo pacman -S "${kernel_headers[*]}"
+    sudo pacman -S --noconfirm "${kernel_headers[*]}"
 }
 
 function archlinux() {
     
     echo "|- Updating system."
-    pacman -Syu --noconfirm >> /dev/null 2>&1
+    pacman -Syu --needed --noconfirm >> /dev/null 2>&1
     
     echo "|- Installing headers."
     install_headers
