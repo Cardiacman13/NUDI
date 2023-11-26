@@ -4,7 +4,6 @@ function uninstall_one() {
     local -r package=$1
     sudo pacman -Rdd --noconfirm ${package} >> /dev/null 2>&1
 }
-}
 
 function uninstall_lst() {
     local -r lst=$1
