@@ -23,12 +23,26 @@ function nvidia_config() {
     fi     
 }
 
+function install_headers() {
+    local kernel_headers=()
+
+    for kernel in /boot/vmlinuz-*; do
+        [ -e "${kernel}" ] || continue
+        kernel_headers+=("$(basename "${kernel}" | sed -e 's/vmlinuz-//')-headers")
+    done
+
+    sudo pacman -S "${kernel_headers[*]}"
+}
+
 function archlinux() {
     
-    echo "|- Update system."
+    echo "|- Updating system."
     pacman -Syu --noconfirm >> /dev/null 2>&1
+    
+    echo "|- Installing headers."
+    install_headers
 
-    echo "|- Remove old dependencies."
+    echo "|- Removing old dependencies."
     local -r unlst="
     nvidia
     nvidia-dkms
