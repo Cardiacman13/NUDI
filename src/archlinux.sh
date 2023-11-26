@@ -3,7 +3,7 @@
 function uninstall_one() {
     local -r package=$1
 
-    log_msg "${RED}[-]${RESET} ${package}"
+    "${RED}[-]${RESET} ${package}"
     exec "sudo pacman -Rdd --noconfirm ${package}"
 }
 
@@ -18,8 +18,8 @@ function uninstall_lst() {
 
 function nvidia_config() {
     if [ ! -f /etc/modprobe.d/nvidia.conf ]; then
-        exec_log "sudo touch /etc/modprobe.d/nvidia.conf" "Creating /etc/modprobe.d/nvidia.conf"
-        exec_log "echo -e 'nvidia-drm.modeset=1' | sudo tee -a /etc/modprobe.d/nvidia.conf" "Setting nvidia-drm.modeset=1 option"
+        sudo touch /etc/modprobe.d/nvidia.conf
+        echo -e 'nvidia-drm.modeset=1' | sudo tee -a /etc/modprobe.d/nvidia.conf
     fi     
 }
 
@@ -31,7 +31,7 @@ function install_headers() {
         kernel_headers+=("$(basename "${kernel}" | sed -e 's/vmlinuz-//')-headers")
     done
 
-    sudo pacman -S --noconfirm "${kernel_headers[*]}"
+    sudo pacman -S --noconfirm "${kernel_headers[*]}" >> /dev/null 2>&1
 }
 
 function archlinux() {
