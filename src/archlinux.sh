@@ -4,7 +4,7 @@ function uninstall_one() {
     local -r package=$1
 
     "${RED}[-]${RESET} ${package}"
-    exec "sudo pacman -Rdd --noconfirm ${package}"
+    sudo pacman -Rdd --noconfirm ${package}
 }
 
 function uninstall_lst() {
