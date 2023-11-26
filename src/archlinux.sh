@@ -2,8 +2,6 @@
 
 function uninstall_one() {
     local -r package=$1
-
-    "${RED}[-]${RESET} ${package}"
     sudo pacman -Rdd --noconfirm ${package}
 }
 
@@ -45,6 +43,7 @@ function archlinux() {
     echo "|- Removing old dependencies."
     local -r unlst="
     nvidia
+    nvidia-lts
     nvidia-dkms
     nvidia-settings
     nvidia-utils
@@ -73,10 +72,9 @@ function archlinux() {
     uninstall_lst "${unlst}"
     nvidia_config
 
-    # Use a while loop to continue prompting the user until a valid choice is made
     read -p "Choose between 'nvidia' (Recommended) or 'nvidia-all' (Note: If you choose nvidia-all, you must know how to maintain it):" choice
 
-    choice=$(echo "$choice" | tr '[:lower:]' '[:upper:]')  # Convert input to uppercase.
+    choice=$(echo "$choice" | tr '[:lower:]' '[:upper:]')
 
     while [[ -z "$choice" || ! "$choice" =~ ^NVIDIA(-ALL)?$ ]]; do
         read -p "Invalid or empty option. Please choose 'nvidia' or 'nvidia-all':" choice
