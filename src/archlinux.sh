@@ -1,44 +1,5 @@
 #!/usr/bin/env bash
 
-# Function to configure the Nvidia hook by copying the nvidia.hook file to /etc/pacman.d/hooks/
-function hook() {
-    echo "|- Configuring the Nvidia hook."
-
-    local hook_folder
-    hook_folder="/etc/pacman.d/hooks/"
-    local hook_file
-    hook_file="nvidia.hook"
-    local hook_src
-    hook_src="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/data/nvidia.hook"
-    
-    # Create the hooks folder if not already done
-    mkdir -p "${hook_folder}"
-
-    # Copy the hook file
-    if cp "${hook_src}" "${hook_folder}${hook_file}"; then
-        echo -e "${GREEN}Nvidia hook configured successfully.${RESET}"
-    else
-        echo -e "${RED}Error configuring the Nvidia hook.${RESET}"
-        exit 1
-    fi
-}
-
-# Function to update the mkinitcpio configuration file to include the necessary NVIDIA modules.
-function mkinitcpio() {
-    echo "|- Configuring mkinitcpio."
-
-    local mkinitcpio_src
-    mkinitcpio_src="/etc/mkinitcpio.conf"
-    
-    # Add NVIDIA modules to mkinitcpio
-    if sed -i '/MODULES=/ s/)/ nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' "${mkinitcpio_src}"; then
-        echo -e "${GREEN}Mkinitcpio configuration successful.${RESET}"
-    else
-        echo -e "${RED}Error configuring mkinitcpio.${RESET}"
-        exit 1
-    fi
-}
-
 # Function to detect the bootloader used by the system and add the "nvidia-drm.modeset=1" option to the boot configuration.
 function bootloaders() {
     echo "|- Detecting the bootloader."
@@ -87,8 +48,6 @@ function archlinux() {
     echo "options nvidia NVreg_PreserveVideoMemoryAllocations=1" | tee "${nvidia_wayland_conf}"
 
     bootloaders
-    mkinitcpio
-    hook
 
     # Use a while loop to continue prompting the user until a valid choice is made
     read -p "Choose between 'nvidia' (Recommended) or 'nvidia-all' (Note: If you choose nvidia-all, you must know how to maintain it):" choice
@@ -103,7 +62,7 @@ function archlinux() {
     case "${choice}" in
         "NVIDIA")
             echo -e "|- Installing Nvidia packages. ${RED}(long)${RESET}"
-            pacman -S --needed --noconfirm nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader >> /dev/null 2>&1
+            pacman -S --needed --noconfirm nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader egl-wayland opencl-nvidia lib32-opencl-nvidia >> /dev/null 2>&1
             echo -e "|- Installing CUDA. ${RED}(very long)${RESET}"
 
             echo "|- Enabling Nvidia services for hibernation, resume, and suspension."
