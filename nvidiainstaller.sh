@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Set the script to exit on error
-set -e
-
 # ====================================== Color Definitions ======================================
 
 # Color definitions
