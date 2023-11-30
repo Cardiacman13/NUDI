@@ -17,7 +17,7 @@ function uninstall_lst() {
 function nvidia_config() {
     if [ ! -f /etc/modprobe.d/nvidia.conf ]; then
         sudo touch /etc/modprobe.d/nvidia.conf
-        echo -e 'nvidia-drm.modeset=1' | sudo tee -a /etc/modprobe.d/nvidia.conf
+        echo -e 'options nvidia-drm modeset=1' | sudo tee -a /etc/modprobe.d/nvidia.conf
     fi     
 }
 
